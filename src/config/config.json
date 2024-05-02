@@ -1,0 +1,9 @@
+{
+    "mysql": {
+        "host" : "localhost",
+        "user" : "root",
+        "passwd" : "root",
+        "database" : "python_projet",
+        "port" : 3306
+    }
+}

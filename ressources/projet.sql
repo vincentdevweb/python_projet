@@ -37,3 +37,7 @@ ALTER TABLE
     utilisateur
 ADD 
     CONSTRAINT email_unique UNIQUE (email);
+
+-- -- test with insert table manually
+
+-- INSERT INTO utilisateur (nom, prenom, email, gender, password, old_password) VALUES ("")
