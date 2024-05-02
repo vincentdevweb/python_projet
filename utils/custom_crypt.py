@@ -1,6 +1,5 @@
 from random import choice, randint
 
-
 class CustomCrypte:
     
     def __init__(self, mdp: str):
