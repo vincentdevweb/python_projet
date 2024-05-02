@@ -1,5 +1,5 @@
 class Utilisateur:
-    def __init__(self, id: int, name: str, prenom: str, email: str, gender: str, password: str, old_password: str) -> None:
+    def __init__(self, id: int = 0, name: str = "", prenom: str ="", email: str ="", gender: str="", password: str="", old_password: str="") -> None:
         self.__id = id
         self.__name = name
         self.__prenom = prenom
@@ -65,8 +65,5 @@ class Utilisateur:
         self.__old_password = value
 
     def __str__(self) -> str:
-        return f"id: {self.__id}, name: {self.__name},
-                    prenom: {self.__prenom}, email: {self.__email},
-                        gender: {self.__gender}, password: {self.__password},
-                            old_password: {self.__old_password}"
+        return f"id: {self.__id}, name: {self.__name},prenom: {self.__prenom}, email: {self.__email},gender: {self.__gender}, password: {self.__password},old_password: {self.__old_password}"
     

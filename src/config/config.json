@@ -2,7 +2,7 @@
     "mysql": {
         "host" : "localhost",
         "user" : "root",
-        "passwd" : "root",
+        "password" : "root",
         "database" : "python_projet",
         "port" : 3306
     }

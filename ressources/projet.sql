@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS utilisateur (
 
 CREATE TABLE IF NOT EXISTS compte (
     id int auto_increment primary key,
-    cle int not null,
-    sel int not null,
+    cle varchar(255) not null,
+    sel varchar(255) not null,
     id_utilisateur int not null
 );
 
