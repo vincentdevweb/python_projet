@@ -4,6 +4,7 @@ def mail_inscription(mail_receiver:str) -> None:
     # Établir une connexion SMTP sécurisée avec le serveur mailersenders
     server = smtplib.SMTP('smtp.mailersend.net', 587)
     server.starttls()  # Activer le mode TLS (Transport Layer Security)
+    server.login()
 
     # Créer le message à envoyer
     sujet = "le chat de pallas : inscription server"
