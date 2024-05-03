@@ -3,7 +3,6 @@ from src.config.my_connection import MyConnection
 from .generique_dao import GenericDao
 from src.models.utilisateur import Utilisateur
 
-
 class UtilisateurDao(GenericDao[Utilisateur]):
     __db = None
     
@@ -35,3 +34,6 @@ class UtilisateurDao(GenericDao[Utilisateur]):
  
     def find_by_id(self, id: int) -> Optional[Utilisateur]:
         return self.__db.query("SELECT * FROM utilisateur WHERE id = %s", (id,)).fetchone()
+    
+    def find_by_email(self, email: str) -> Optional[Utilisateur]:
+        return self.__db.query("SELECT * FROM utilisateur WHERE email = %s", (email,)).fetchone()

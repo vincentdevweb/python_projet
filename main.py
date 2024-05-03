@@ -56,18 +56,18 @@ from src.models.compte import Compte
 
 # working!!!!---
 dao = CompteDao()
-new_compte = Compte(3,"125568","54498849",1)
-# dao.start()
-# dao.save(new_compte)
-# dao.commit()
+new_compte = Compte(3,"125568","54498849",2)
+dao.start()
+dao.save(new_compte)
+dao.commit()
 
 # for compte_tuples in dao.find_all():
 #     compte = Compte(*compte_tuples)
 #     print(compte)
 
-new_compte.sel = "voici du sel j'ai pas de poivre"
-dao.update(new_compte)
-dao.commit()
+# new_compte.sel = "voici du sel j'ai pas de poivre"
+# dao.update(new_compte)
+# dao.commit()
 
 # print(*dao.find_by_id(3))
 

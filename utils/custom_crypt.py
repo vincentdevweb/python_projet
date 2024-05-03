@@ -1,24 +1,25 @@
 from random import choice, randint
 
-class CustomCrypte:
+class CustomCrypt:
     
-    def __init__(self, mdp: str):
+    def __init__(self, mdp: str) -> None:
         self.__mdp = mdp
-        self.__sel = self.sel_generator(self.__mdp)
-        self.__cle = self.generate_tuples(len(self.__sel))
-        self.__mdp_chiffrer = self.crypt(self.__cle, str(self.__mdp+self.__cle))
+        self.__sel = self.sel_generator(len(self.__mdp))
+        self.__mdp_sel = self.__mdp+self.__sel
+        self.__cle = self.generate_tuples(self.__mdp_sel)
+        self.__mdp_chiffrer = self.crypt(self.__cle, self.__mdp_sel)
         
-    def crypt(cle: tuple , mdp_sel: str) -> str:
+    def crypt(self, cle: tuple , mdp_sel: str) -> str:
         res_str = ""
         for i,v in enumerate(cle):
             res = int((v + ord(mdp_sel[i])) % 128)
             res_str += chr(res)
         return res_str
 
-    def generate_tuples(len_mdp_sel: int) -> tuple:
+    def generate_tuples(self, len_mdp_sel: int) -> tuple:
         return tuple(randint(0,55) for _ in range(len(len_mdp_sel)))
     
-    def sel_generator(n: int , min: bool = True, maj: bool = True, chif: bool = True, cs: bool = True):
+    def sel_generator(self, n: int , min: bool = True, maj: bool = True, chif: bool = True, cs: bool = True):
         alphabet_min = [ chr(i) for i in range(97,123) ]
         alphabet_maj = [ chr(i) for i in range(65,91) ]
         chiffres = [ str(i) for i in range(0,10) ]
@@ -55,7 +56,7 @@ class CustomCrypte:
     def mdp(self, value):
         self.__mdp = value
         
-    property
+    @property
     def sel(self):
         return self.__sel
 
