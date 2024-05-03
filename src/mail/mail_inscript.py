@@ -7,7 +7,7 @@ def mail_inscription(mail_receiver:str) -> None:
 
     # Créer le message à envoyer
     sujet = "le chat de pallas : inscription server"
-    corps_du_message = "Hello, ceci est un e-mail envoyé depuis Python ! Tu es bien inscript sur le server "
+    corps_du_message = "Hello, ceci est un e-mail envoyé depuis Python ! Tu es bien inscript sur le server"
     msg = f'Subject: {sujet}\n\n{corps_du_message}'.encode('utf-8')
 
 

@@ -6,6 +6,23 @@ from src.models.compte import Compte
 from utils.custom_crypt import CustomCrypt
 from src.mail.mail_inscript import mail_inscription
 
+def update_utilisateur():
+    pass
+
+def delete_utilisateur(id_utilisateur:int ) -> None:
+    dao_utilisateur = UtilisateurDao()
+    dao_utilisateur.delete(id_utilisateur)
+    dao_utilisateur.commit()
+    dao_utilisateur.close()
+    messagebox.showinfo("Suppression", "Utilisateur supprimé vous pouvez quitter la fenetre courante")
+
+def new_frame():
+    new_window = Tk()
+    new_window.title("Lecture Utilisateur")
+    new_window.geometry("400x400")
+    new_window.config(bg="#000000")
+    return new_window
+
 def inscription_bdd_compte(mdp: str, new_utilisateur:Utilisateur) -> str:
     
     dao_compte = CompteDao()
@@ -86,6 +103,34 @@ def connexion():
         
         if(mdp_crypter == recup_utilisateur.password):
             messagebox.showinfo("Résultat", f"Connexion reussi vous allez recevoir un mail de connexion")
+            frame2 = new_frame()
+            labelf2_1 = Label(frame2, text="Nom")
+            labelf2_2 = Label(frame2, text="E-Mail")
+            labelf2_3 = Label(frame2, text="Change Mdp")
+            labelf2_1.grid(row = 0 , column = 0)
+            labelf2_2.grid(row = 1 , column = 0)
+            labelf2_3.grid(row = 2 , column = 0)
+
+            entryf2_1 = Entry(frame2)
+            entryf2_1.insert(0,str(recup_utilisateur.name))
+            
+            entryf2_2 = Entry(frame2)
+            entryf2_2.insert(0,str(recup_utilisateur.email))
+            
+            entryf2_3 = Entry(frame2)
+            
+            entryf2_1.grid(row = 0 , column =1)
+            entryf2_2.grid(row = 1 , column =1)
+            entryf2_3.grid(row = 2 , column =1)
+
+            buttonf2_1 = Button(frame2, text="Update",command=update_utilisateur)
+            buttonf2_1.grid(row = 4 , column = 1)
+            buttonf2_2 = Button(frame2, text="Delete",command=lambda: delete_utilisateur(recup_utilisateur))
+            buttonf2_2.grid(row = 5 , column = 1)
+            buttonf2_3 = Button(frame2, text="Exit",command=frame2.destroy)
+            buttonf2_3.grid(row = 6 , column = 1)
+            
+            frame2.mainloop()
         else:
             messagebox.showinfo("Résultat", f"Connexion échoué")
 
