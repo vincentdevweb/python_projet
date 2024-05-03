@@ -64,24 +64,40 @@ def inscription():
     except Exception as e:
         messagebox.showerror("Erreur", f"Erreur lors de l'inscription : {e}")
         
-# def connexion():
-#     try:
-#         nom = str(entry1.get())
-#         email = str(entry2.get())
-#         mdp = str(entry3.get())
+def connexion():
+    try:
+        dao_utilisateur = UtilisateurDao()
+        dao_compte = CompteDao()
         
-#         messagebox.showinfo("Résultat", f"inscription reussi vous allez recevoir un mail d'incription")
-#         # clear entry
-#         entry1.delete(0, 'end')
-#         entry2.delete(0, 'end')
-#         entry3.delete(0, 'end')
-#     except:
-#         messagebox.showerror("Erreur", f"Erreur lors de l'inscription")
+        email = str(entry2.get())
+        mdp = str(entry3.get())
+        
+        # encrypt le mot de passe recupere 
+        crypt = CustomCrypt(mdp)
+        
+        # recupere les compte Utilisateur et Compte associated
+        recup_utilisateur = Utilisateur(*dao_utilisateur.find_by_email(email))
+        recup_compte = Compte(*dao_compte.find_by_utilisateur_id(recup_utilisateur.id))
+        
+        # On cherche a determiner si la clé crypter de l'utilisateur est equale a celle entrer par l'utilisateur
+        cle = tuple(int(element) for element in recup_compte.cle.split('|'))
+        mdp_sel = mdp + recup_compte.sel
+        mdp_crypter = crypt.crypt(cle,mdp_sel)
+        
+        if(mdp_crypter == recup_utilisateur.password):
+            messagebox.showinfo("Résultat", f"Connexion reussi vous allez recevoir un mail de connexion")
+        else:
+            messagebox.showinfo("Résultat", f"Connexion échoué")
+
+        entry1.delete(0, 'end')
+        entry2.delete(0, 'end')
+        entry3.delete(0, 'end')
+
+    except Exception as e:
+        messagebox.showerror("Erreur", f"Erreur pb serveur {e}")
 
 frame = Tk()
 
-width = frame.winfo_screenwidth()
-height = frame.winfo_screenheight()
 width = 400
 height = 400
 frame.title('Programme inscriptions/connexion en faveur des chats de pallas')
@@ -101,19 +117,10 @@ entry1.grid(row = 0 , column =1)
 entry2.grid(row = 1 , column =1)
 entry3.grid(row = 2 , column =1)
 
-# operateur_liste = ["+", "-", "*", "/"]
-# combobox = ttk.Combobox(frame, values=operateur_liste)
-# combobox.current(0)
-# combobox.grid(row = 3 , column = 1)
-
 button1 = Button(frame, text="Inscription",command=inscription)
 button1.grid(row = 4 , column = 1)
-# button2 = Button(frame, text="Connexion",command=connexion)
-# button2.grid(row = 5 , column = 1)
-# ut = Utilisateur(2,"Miaou","John","miaou@gmail.com","H","12345","12457")
-# inscription_bdd_compte("miaou",ut)
-frame.mainloop()
+button2 = Button(frame, text="Connexion",command=connexion)
+button2.grid(row = 5 , column = 1)
 
-# recuperer_liste 
-# tuple_exemple = tuple(int(element) for element in chaine_de_caracteres.split('|'))
+frame.mainloop()
 

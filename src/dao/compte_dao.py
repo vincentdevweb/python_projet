@@ -35,3 +35,6 @@ class CompteDao(GenericDao[Compte]):
  
     def find_by_id(self, id: int) -> Optional[Compte]:
         return self.__db.query("SELECT * FROM compte WHERE id = %s", (id,)).fetchone()
+    
+    def find_by_utilisateur_id(self, id_utilisateur: int) -> Optional[Compte]:
+        return self.__db.query("SELECT * FROM compte WHERE id_utilisateur = %s", (id_utilisateur,)).fetchone()
